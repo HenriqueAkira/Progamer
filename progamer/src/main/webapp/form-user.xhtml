@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+	  	<title><ui:insert name="title">Progamer</ui:insert></title>
+	  	<h:outputStylesheet library="css" name="global.css"></h:outputStylesheet>
+	</h:head>
+	
+	<body>
+		<ui:composition template="_template.xhtml">
+			<ui:define name="content">
+		
+				<p:messages id="messages">
+					<p:autoUpdate></p:autoUpdate>
+				</p:messages>
+			
+				<h:form>
+					<p:card class="card-form">
+						<f:facet name="title" >User Registration</f:facet>
+		
+						<h:panelGrid columns="2">
+							
+							<p:outputLabel value="Name" for="name" />
+							<p:inputText id="name" value="#{userBean.user.name}" required="true" >
+								<f:ajax event="blur" render="messages"/>
+							</p:inputText>
+	 
+							<p:outputLabel value="Birth date" for="birthDate" />
+							<p:datePicker id="birthDate" required="true" value="#{userBean.user.birthDate}">
+								<f:ajax event="blur" render="messages"/>
+							</p:datePicker> 
+		
+							<p:outputLabel value="Email" for="email" />
+							<p:inputText id="email" value="#{userBean.user.email}" required="true" requiredMessage="Email: Erro de validação, padrão não corresponde a um email">
+								<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+								<f:ajax event="blur" render="messages"/>
+							</p:inputText>	
+							
+							<p:outputLabel value="Password" for="password"/>
+							<p:password id="password" value="#{userBean.user.password}" toggleMask="true" redisplay="true" feedback="true" required="true">
+								<f:validateLength minimum="6" maximum="101"/>
+								<f:ajax event="blur" render="messages"/>
+							</p:password>
+							
+							
+						</h:panelGrid>
+		
+						<f:facet name="footer">
+							<p:commandButton icon="pi pi-check" value="Save" action="#{userBean.save}">
+								<f:ajax execute="@form" render="form-users"/>
+							</p:commandButton>
+							<p:commandButton icon="pi pi-times" value="Cancel" styleClass="cancel-button ui-button-secondary"/>
+						</f:facet>
+					</p:card>
+				</h:form>
+				
+				<div class="card" id="card-user-list"> 
+					<h:form id="form-users">
+						<p:dataTable 
+							id="users" 
+							var="user"
+							value="#{userBean.users}" 
+							rowKey="#{user.id}"
+							selectionMode="single">
+							<f:facet name="header">Users List</f:facet>
+							<p:column headerText="Name">
+								<h:outputText value="#{user.name}" />
+							</p:column>
+							<p:column headerText="BirthDate">
+								<h:outputText value="#{user.birthDate}" />
+							</p:column>
+							<p:column headerText="Email">
+								<h:outputText value="#{user.email}" />
+							</p:column>
+						</p:dataTable>
+						<p:contextMenu for="users">
+							<p:menuitem value="Delete" update="users" icon="pi pi-times"
+								action="#{userBean.executar}" />
+						</p:contextMenu>
+					</h:form> 
+				</div>
+			
+			
+			</ui:define>
+		</ui:composition>
+		
+	</body>
+</html>
