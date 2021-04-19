@@ -22,7 +22,6 @@ public class SetupBean {
 		this.setup = new Setup();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Setup cadastrado com sucesso"));
 		
-		System.out.println("Salvando setup");
 	}
 	
 	public List<Setup> getSetups(){
