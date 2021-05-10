@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.fiap.model.Setup;
 import br.com.fiap.model.User;
 import br.com.fiap.util.EntityManagerFacade;
 
@@ -27,4 +28,24 @@ public class UserDAO {
 		return em.createQuery(query, User.class).getResultList();
 		
 	}
+
+	public User findById(Integer id) {
+		User user = em.find(User.class, id);
+		return user;
+	}
+
+	public void update(User user) {
+		em.getTransaction().begin();
+		em.merge(user);
+		em.flush();
+		em.getTransaction().commit();
+	}
+	
+	public void delete(int id) {
+		em.getTransaction().begin();
+		User user = findById(id);
+		em.remove(user);
+		em.getTransaction().commit();
+	}
+	
 }

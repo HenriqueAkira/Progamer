@@ -1,5 +1,5 @@
 package br.com.fiap.model;
-
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,8 +23,7 @@ public class User{
 	
 	private String name;
 	
-	@Temporal(TemporalType.DATE)
-	private Date birthDate;
+	private LocalDate birthDate;
 	private String email;
 	private String password;
 	
@@ -56,11 +55,11 @@ public class User{
 		this.password = password;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 

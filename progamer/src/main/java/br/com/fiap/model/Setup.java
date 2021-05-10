@@ -27,7 +27,10 @@ public class Setup {
 	public int getId() {
 		return id;
 	}
-
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -56,6 +59,7 @@ public class Setup {
 	public String toString() {
 		return "Setup [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
+
 	
 	
 	
