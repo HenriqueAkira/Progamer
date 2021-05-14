@@ -36,6 +36,7 @@
 							<f:validateDoubleRange minimum="1" />
 							<f:ajax event="blur" render="messages"/>
 						</p:inputText>
+						
 	
 					</h:panelGrid>
 	
@@ -55,7 +56,7 @@
 					<p:dataTable 
 						id="setups" 
 						var="setup"
-						value="#{setupBean.setups}" 
+						value="#{setupBean.setupsByUser}" 
 						rowKey="#{setup.id}"
 						selectionMode="single">
 						<f:facet name="header">

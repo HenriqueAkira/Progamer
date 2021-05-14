@@ -21,6 +21,25 @@ public class UserBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário cadastrado com sucesso!"));
 	}
 	
+	public String login(){	
+		User exist = new UserDAO().exist(this.user);
+		if(exist != null) {
+			this.user = exist;
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+			return "index?faces-redirect=true";
+		}
+		else {
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Invalido!", "Erro"));
+			return "login?faces-redirect=true";
+		}
+	}
+	
+	public String logout() {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user");
+		return "login?faces-redirect=true"; 
+	}
+	
 	public List<User> getUsers(){
 		return new UserDAO().getAll();
 	}

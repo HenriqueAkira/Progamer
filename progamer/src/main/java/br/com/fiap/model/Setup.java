@@ -2,10 +2,13 @@ package br.com.fiap.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,6 +22,10 @@ public class Setup {
 	private String name;
 	private String description;
 	private BigDecimal price = new BigDecimal(1000);
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private User user;
 
 	public Setup() {
 	}
@@ -58,6 +65,16 @@ public class Setup {
 	@Override
 	public String toString() {
 		return "Setup [name=" + name + ", description=" + description + ", price=" + price + "]";
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	
