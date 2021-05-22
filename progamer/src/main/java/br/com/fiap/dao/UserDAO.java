@@ -20,8 +20,6 @@ public class UserDAO {
 		em.getTransaction().commit();
 		
 		em.close();
-				
-	
 	}
 
 	public List<User> getAll() {
@@ -33,7 +31,6 @@ public class UserDAO {
 
 	public User findById(Integer id) {
 		User user = em.find(User.class, id);
-		em.close();
 		return user;
 	}
 
@@ -42,7 +39,6 @@ public class UserDAO {
 		em.merge(user);
 		em.flush();
 		em.getTransaction().commit();
-		em.close();
 	}
 	
 	public void delete(int id) {
@@ -50,7 +46,6 @@ public class UserDAO {
 		User user = findById(id);
 		em.remove(user);
 		em.getTransaction().commit();
-		em.close();
 	}
 
 	public User exist(User user) {
@@ -63,9 +58,7 @@ public class UserDAO {
 			return result;
 		} catch (Exception e) {
 			return null;
-		} finally {
-			em.close();
-		}
+		} 
 		
 	}
 	

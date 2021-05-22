@@ -68,6 +68,7 @@ public class UserEndPoint {
 			 userDao.update(user);
 			 return Response.status(Response.Status.OK).entity(user).build();
 		 }catch (Exception e) {
+			 e.printStackTrace();
 			 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 		 
@@ -80,9 +81,11 @@ public class UserEndPoint {
 		if(userDao.findById(id) == null) return Response.status(Response.Status.NOT_FOUND).build();
 		
 		try {
+			System.out.println(id);
 			userDao.delete(id);
 			return Response.status(Response.Status.OK).build();
 		}catch (Exception e) {
+			e.printStackTrace();
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 		

@@ -28,7 +28,7 @@ public class User{
 	private String password;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-	private List<Setup> setup;
+	private List<Setup> setups;
 	
 	public User() {
 	}
